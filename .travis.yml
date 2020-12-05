@@ -6,22 +6,22 @@ services:
    - docker
   
 before_install:
-   - docker build -t neps/react-test-app -f ./frontend/Dockerfile.dev ./frontend
+   - docker build -t likebat/react-test-app -f ./frontend/Dockerfile.dev ./frontend
   
 script:
-   - docker run -e CI=true neps/react-test-app npm run test
+   - docker run -e CI=true likebat/react-test-app npm run test
 
 after_success:
-   - docker build -t neps/docker-frontend ./frontend
-   - docker build -t neps/docker-backend ./backend
-   - docker build -t neps/docker-nginx   ./nginx
+   - docker build -t likebat/docker-frontend ./frontend
+   - docker build -t likebat/docker-backend ./backend
+   - docker build -t likebat/docker-nginx   ./nginx
 
 
    - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
 
   
-   - docker push neps/docker-frontend
-   - docker push neps/docker-backend
-   - docker push neps/docker-nginx
+   - docker push likebat/docker-frontend
+   - docker push likebat/docker-backend
+   - docker push likebat/docker-nginx
 
 
